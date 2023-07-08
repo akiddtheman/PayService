@@ -1,5 +1,5 @@
 from main import app
-from database import register_user_db, check_password_db,get_user_cabinet_db
+from database import register_user_db, check_password_db,get_user_cabinet_db, get_user_cards_by_phone_number_db
 
 from datetime import datetime
 
@@ -32,5 +32,7 @@ async def get_user_cabinet_api(user_id: int):
 # Получить карты по номеру
 @app.get('/get-user-cards-by-phone')
 async def get_user_cards_by_phone_number_api(phone_number: int):
-    pass
+    result = get_user_cards_by_phone_number_db(phone_number)
+
+    return {'status': 1, 'message': result}
 

@@ -46,7 +46,7 @@ def get_exact_business_db(business_id: int, category_id: int):
 # Удалить бизнес
 def delete_business_db(business_id: int):
     db = next(get_db())
-    business = db.query(Service).filter_by(id=business_id).first()
+    business = db.query(Service).filter_by(service_id=business_id).first()
 
     if business:
         db.delete(business)
@@ -54,3 +54,15 @@ def delete_business_db(business_id: int):
         return "Бизнес успешно удален"
     else:
         return "Бизнес не найден"
+
+# Удалить бизнес категорию
+def delete_business_category_db(category_id: int):
+    db = next(get_db())
+    category = db.query(ServiceCategory).filter_by(category_id=category_id).first()
+
+    if category:
+        db.delete(category)
+        db.commit()
+        return "Бизнес категория успешно удалена"
+    else:
+        return "Бизнес категория не найдена"
