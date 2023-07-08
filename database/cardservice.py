@@ -31,15 +31,15 @@ def delete_user_card_db(card_id, user_id):
         return "Карта не найдена"
 
 # Получить все карты по номеру телефона
-def get_user_cards_by_phone_number(phone_number):
+def get_user_cards_by_phone_number(user_id, card_id):
     db = next(get_db())
-    user = db.query(User).filter_by(phone_number=phone_number).first()
+    if card_id == 0:
+        card_data = db.query(Card).filter_by(user_id=user_id).all()
 
-    if user:
-        cards = db.query(Card).filter_by(user_id=user.id).all()
-        return cards
     else:
-        return "Пользователь не найден"
+        card_data = db.query(Card).filter_by(user_id=user_id, card_id=card_id).first()
+
+    return card_data
 
 
 # Получить определенную карту

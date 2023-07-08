@@ -43,17 +43,6 @@ def get_exact_business_db(business_id: int, category_id: int):
     else:
         return "Бизнес не найден"
 
-# Оплата услуги
-def pay_for_service_db(business_id: int, from_card: int, amount: float):
-    db = next(get_db())
-    transaction = Transaction(business_id=business_id,
-                              card_id=from_card,
-                              amount=amount)
-    db.add(transaction)
-    db.commit()
-
-    return "Услуга успешно оплачена"
-
 # Удалить бизнес
 def delete_business_db(business_id: int):
     db = next(get_db())
